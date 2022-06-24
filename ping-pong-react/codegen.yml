@@ -1,0 +1,14 @@
+overwrite: true
+schema:
+  - https://us-east-1.aws.realm.mongodb.com/api/client/v2.0/app/pingpongapp-mvxcd/graphql:
+      headers:
+        apiKey: eVaziLp8LgiFJivRQDgoLsjqbqm8KH5W2ykd4GD1hhR4FQ4DbE2I4wtEtM21hmpv
+documents: "./src/components/**/*.{ts,tsx}"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
