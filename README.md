@@ -33,7 +33,21 @@ KEY = "apiKey"
 - When you `cd` into the `ping-pong-react` folder run the command `npm install` and `yarn install` to install all the dependencies of this project.
 - Use the API you configured at `Backend` three times, one for matches, two for players. The data can be whatever you want, as long as it creates two new players and a match.
 - Go to [this](https://www.mongodb.com/docs/atlas/app-services/graphql/#how-app-services-creates-graphql-schemas) link and create a new app.
-- Generate the GraphQL schema on the three collections
+- Generate the GraphQL schema on the three collections, and add this code on the relationships field of the `matches` collection:
+```
+{
+  "loserId": {
+    "ref": "#/relationship/mongodb-atlas/PingPong/players",
+    "foreignKey": "_id",
+    "isList": false
+  },
+  "winnerId": {
+    "ref": "#/relationship/mongodb-atlas/PingPong/players",
+    "foreignKey": "_id",
+    "isList": false
+  }
+}
+```
 - Allow and create an API key as a method of authentication on App services.
 - Copy your GraphQL API link from App Services.
 - Inside `codegen.yml` swap the `schema` link and `apiKey` to yours.
