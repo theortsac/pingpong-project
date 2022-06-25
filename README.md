@@ -51,7 +51,8 @@ KEY = "apiKey"
 - Allow and create an API key as a method of authentication on App services.
 - Copy your GraphQL API link from App Services.
 - Inside `codegen.yml` swap the `schema` link and `apiKey` to yours.
-- Enable Aunonymous authentication on App Services.
-- On the main `index.tsx` file line 20, change the `uri` to your GraphQL API link
+- Enable Anonymous authentication on App Services.
+- On the main `index.tsx` file line 20, change the `uri` to your GraphQL API link.
+- To run the app simply type `npm start`.
 
 ### With that you should be able to run your own database and API and add your own data to the database! Hope you had fun :)
