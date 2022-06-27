@@ -38,7 +38,7 @@ app.get('/addMatch', async function(req,res)
   const loserPoints = req.query.loserPoints;
   if (key == API_KEY) {
     const highestIds = await highestIdCollection.findOne({"_id": 0});
-    if (parseInt(winnerId) != parseInt(loserId) && parseInt(winnerId) > 0 && parseInt(loserId) > 0 && parseInt(winnerId) <= highestIds["highestPlayerId"] && parseInt(loserId) <= highestIds["highestPlayerId"] && winnerPoints > 0 && parseInt(winnerId) > parseInt(loserId))
+    if (parseInt(winnerId) != parseInt(loserId) && parseInt(winnerId) > 0 && parseInt(loserId) > 0 && parseInt(winnerId) <= highestIds["highestPlayerId"] && parseInt(loserId) <= highestIds["highestPlayerId"] && winnerPoints > 0 && loserPoints >= 0)
     {
       let Match: Match = {
         _id: highestIds["highestMatchId"] + 1,
