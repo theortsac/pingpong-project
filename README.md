@@ -20,7 +20,7 @@ To run the project you need to setup the Backend and the Frontend, here's a guid
 ```
 - Create a file named `.env` inside this folder
 - Get your access URI from the website
-- Fill this and paste inside the `.env` (the API can be whataver you want as long as it doesn't contain `&` or `=`)
+- Fill this and paste inside the `.env` (the API can be whatever you want as long as it doesn't contain `&` or `=`)
 ```
 URI = "yourAccessURI"
 KEY = "apiKey"
