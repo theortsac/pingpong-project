@@ -56,3 +56,4 @@ KEY = "apiKey"
 - To run the app simply type `npm start`.
 
 ### With that you should be able to run your own database and API and add your own data to the database! Hope you had fun :)
+## OBS: If you want to just read the info of my database, and not be able to add any data yourself, you can access the `ping-pong-react` folder, run `npm install`, `yarn install`, and to run the app `npm start`.
