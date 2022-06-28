@@ -21,14 +21,10 @@ const app = express();
 app.get('/addMatch', function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const key = req.query.key;
-        let winnerId = req.query.winnerId;
-        let loserId = req.query.loserId;
-        let winnerPoints = req.query.winnerPoints;
-        let loserPoints = req.query.loserPoints;
-        winnerId = parseInt(winnerId);
-        loserId = parseInt(loserId);
-        winnerPoints = parseInt(winnerPoints);
-        loserPoints = parseInt(loserPoints);
+        let winnerId = parseInt(req.query.winnerId);
+        let loserId = parseInt(req.query.loserId);
+        let winnerPoints = parseInt(req.query.winnerPoints);
+        let loserPoints = parseInt(req.query.loserPoints);
         if (key == API_KEY) {
             const highestIds = yield highestIdCollection.findOne({ _id: 0 });
             if (winnerId != loserId && winnerId > 0 && loserId > 0 && winnerId <= highestIds["highestPlayerId"] && loserId <= highestIds["highestPlayerId"] && winnerPoints > 0 && loserPoints >= 0) {
