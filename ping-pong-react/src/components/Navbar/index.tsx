@@ -3,7 +3,7 @@ import './styles.css';
 
 const navbar = () => {
 return (
-<div>
+<div className='NavBar'>
 <div className='PageLinkF'>
 <Link to="/">
   <button className='NavButton'>

@@ -1,4 +1,5 @@
 #AddDataDiv {
     margin-left: 50px;
     padding-right: 50px;
+    width: calc(100vw - 125px);
 }
