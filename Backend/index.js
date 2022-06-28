@@ -21,26 +21,31 @@ const app = express();
 app.get('/addMatch', function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const key = req.query.key;
-        const winnerId = req.query.winnerId;
-        const loserId = req.query.loserId;
-        const winnerPoints = req.query.winnerPoints;
-        const loserPoints = req.query.loserPoints;
+        let winnerId = req.query.winnerId;
+        let loserId = req.query.loserId;
+        let winnerPoints = req.query.winnerPoints;
+        let loserPoints = req.query.loserPoints;
+        winnerId = parseInt(winnerId);
+        loserId = parseInt(loserId);
+        winnerPoints = parseInt(winnerPoints);
+        loserPoints = parseInt(loserPoints);
         if (key == API_KEY) {
-            const highestIds = yield highestIdCollection.findOne({ "_id": 0 });
-            if (parseInt(winnerId) != parseInt(loserId) && parseInt(winnerId) > 0 && parseInt(loserId) > 0 && parseInt(winnerId) <= highestIds["highestPlayerId"] && parseInt(loserId) <= highestIds["highestPlayerId"] && winnerPoints > 0 && parseInt(winnerId) > parseInt(loserId)) {
+            const highestIds = yield highestIdCollection.findOne({ _id: 0 });
+            if (winnerId != loserId && winnerId > 0 && loserId > 0 && winnerId <= highestIds["highestPlayerId"] && loserId <= highestIds["highestPlayerId"] && winnerPoints > 0 && loserPoints >= 0) {
                 let Match = {
                     _id: highestIds["highestMatchId"] + 1,
-                    winnerId: parseInt(winnerId),
-                    loserId: parseInt(loserId),
-                    winnerPoints: parseInt(winnerPoints),
-                    loserPoints: parseInt(loserPoints)
+                    winnerId: winnerId,
+                    loserId: loserId,
+                    winnerPoints: winnerPoints,
+                    loserPoints: loserPoints
                 };
-                yield players.findOneAndUpdate({ "_id": parseInt(winnerId) }, { $inc: { points: 1 } });
-                if (players.findOne({ _id: parseInt(loserId) }) > 0) {
-                    yield players.findOneAndUpdate({ "_id": parseInt(loserId) }, { $inc: { points: -1 } });
+                yield players.findOneAndUpdate({ _id: winnerId }, { $inc: { points: 1 } });
+                const loserData = yield players.findOne({ _id: loserId });
+                if (loserData["points"] > 0) {
+                    yield players.findOneAndUpdate({ _id: loserId }, { $inc: { points: -1 } });
                 }
                 yield matches.insertOne(Match);
-                yield highestIdCollection.findOneAndUpdate({ "_id": 0 }, { $inc: { highestMatchId: 1 } });
+                yield highestIdCollection.findOneAndUpdate({ _id: 0 }, { $inc: { highestMatchId: 1 } });
                 res.sendStatus(201);
                 console.log(201);
             }
@@ -61,8 +66,8 @@ app.get('/addPlayer', function (req, res) {
         const firstName = req.query.firstName;
         const lastName = req.query.lastName;
         if (key == API_KEY) {
-            if (!(yield players.findOne({ "firstName": firstName, "lastName": lastName }))) {
-                const highestIds = yield highestIdCollection.findOne({ "_id": 0 });
+            if (!(yield players.findOne({ firstName: firstName, lastName: lastName }))) {
+                const highestIds = yield highestIdCollection.findOne({ _id: 0 });
                 let Player = {
                     _id: highestIds["highestPlayerId"] + 1,
                     points: 0,
@@ -70,7 +75,7 @@ app.get('/addPlayer', function (req, res) {
                     lastName: lastName
                 };
                 yield players.insertOne(Player);
-                yield highestIdCollection.findOneAndUpdate({ "_id": 0 }, { $inc: { highestPlayerId: 1 } });
+                yield highestIdCollection.findOneAndUpdate({ _id: 0 }, { $inc: { highestPlayerId: 1 } });
                 res.sendStatus(201);
                 console.log(201);
             }
